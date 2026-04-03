@@ -254,7 +254,7 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
   justify-content: center;
 }
 
-/* Ensure local MP4 files fill the container correctly */
+/* Fix for local video files - Ensures they fill the frame */
 .video-thumb video {
   width: 100%;
   height: 100%;
@@ -262,9 +262,10 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
   display: block;
 }
 
-/* For Short Form (Reels) - maintains vertical aspect ratio */
-.video-thumb[style*="aspect-ratio:9/16"] video {
-  object-fit: cover;
+/* Special fix for Short Form (Reels) - maintains 9:16 ratio */
+.video-card .video-thumb[style*="aspect-ratio: 9/16"],
+.video-card .video-thumb[style*="aspect-ratio:9/16"] {
+  aspect-ratio: 9/16 !important;
 }
 
 /* ── RESULTS ── */
@@ -369,7 +370,7 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
   justify-content: center;
 }
 
-/* Optimized for FAIZ.jpg */
+/* Fixed for FAIZ.jpg display */
 .founder-photo img {
   width: 100%;
   height: 100%;
@@ -378,6 +379,7 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
   position: relative;
   z-index: 2;
 }
+
 .founder-photo::before {
   content: '';
   position: absolute;
