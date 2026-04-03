@@ -101,8 +101,25 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
 .stat-num{font-family:var(--font-display);font-size:42px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:6px;}
 .stat-label{font-size:11px;letter-spacing:0.1em;color:var(--text-dim);text-transform:uppercase;}
 
-.scroll-indicator{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:10;}
-.scroll-mouse{width:22px;height:36px;border:1px solid var(--border);border-radius:11px;position:relative;}
+.scroll-indicator{
+  position:absolute;
+  bottom:80px; /* FIXED */
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  z-index:10;
+}
+
+.scroll-mouse{
+  width:22px;
+  height:36px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  position:relative;
+}
 .scroll-mouse::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:2px;height:8px;background:var(--gold);border-radius:1px;animation:scroll-dot 2s ease-in-out infinite;}
 @keyframes scroll-dot{0%,100%{transform:translateX(-50%) translateY(0);opacity:1;}50%{transform:translateX(-50%) translateY(10px);opacity:0.3;}}
 .scroll-text{font-size:10px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;}
@@ -125,28 +142,60 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
 .vs-cell.us{color:var(--text-muted);}
 .vs-cell.us::before{content:'';width:12px;height:12px;background:rgba(201,168,76,0.15);border:1px solid var(--gold);border-radius:50%;flex-shrink:0;}
 
+.promise-pillars{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.pillar{background:var(--surface-2);padding:28px;transition:background 0.3s;cursor:default;position:relative;overflow:hidden;}
+.pillar::before{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--gold);transition:width 0.4s var(--ease);}
+.pillar:hover{background:var(--surface-3);}
+.pillar:hover::before{width:100%;}
+.pillar-icon{width:32px;height:32px;margin-bottom:14px;}
+.pillar h4{font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;margin-bottom:6px;color:var(--text);}
+.pillar p{font-size:12px;color:var(--text-muted);line-height:1.6;font-weight:300;}
+
 /* ── SERVICES ── */
 #services{background:var(--black);}
 .services-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:36px;}
 .services-header h2{font-size:clamp(40px,4.5vw,66px);line-height:1.05;letter-spacing:-0.02em;}
 .services-header p{color:var(--text-muted);font-size:16px;line-height:1.7;font-weight:300;}
 
-.guarantee-banner{display:flex;align-items:center;gap:20px;padding:26px 32px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.4);margin-bottom:56px;position:relative;overflow:hidden;}
+.guarantee-banner{display:flex;align-items:center;gap:20px;padding:26px 32px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.4);margin-bottom:56px;position:relative;overflow:hidden;box-shadow: 0 0 40px rgba(201,168,76,0.05);}
+.guarantee-banner::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold);}
+.guarantee-banner::after{content:'';position:absolute;top:0;right:0;bottom:0;width:300px;background:linear-gradient(to left,rgba(201,168,76,0.06),transparent);}
 .guarantee-icon{width:44px;height:44px;flex-shrink:0;}
 .guarantee-text{font-size:16px;color:var(--text);line-height:1.6;font-weight:400;position:relative;z-index:1;}
 .guarantee-text strong{color:var(--gold);font-weight:600;}
 
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-soft);}
-.service-card{background:var(--black);padding:52px 44px;transition:background 0.3s;position:relative;overflow:hidden;}
+.service-card{background:var(--black);padding:52px 44px;transition:background 0.3s;position:relative;overflow:hidden;cursor:default;}
+.service-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,168,76,0.03),transparent);transition:height 0.4s var(--ease);}
 .service-card:hover{background:var(--surface);}
-.service-num{font-family:var(--font-display);font-size:56px;font-weight:300;color:var(--text-dim);line-height:1;margin-bottom:24px;}
-.service-icon{width:44px;height:44px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:28px;}
-.service-card h3{font-size:26px;font-weight:400;margin-bottom:14px;}
-.service-card>p{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:28px;}
+.service-card:hover::after{height:100%;}
+.service-num{font-family:var(--font-display);font-size:56px;font-weight:300;color:var(--text-dim);line-height:1;margin-bottom:24px;transition:color 0.3s;}
+.service-card:hover .service-num{color:rgba(201,168,76,0.2);}
+.service-icon{width:44px;height:44px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:28px;transition:border-color 0.3s,background 0.3s;}
+.service-card:hover .service-icon{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04);}
+.service-card h3{font-size:26px;font-weight:400;margin-bottom:14px;letter-spacing:-0.01em;}
+.service-card>p{font-size:14px;color:var(--text-muted);line-height:1.7;font-weight:300;margin-bottom:28px;}
 .service-features{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;}
-.service-features li{font-size:13px;color:var(--text-dim);display:flex;align-items:center;gap:10px;}
+.service-features li{font-size:13px;color:var(--text-dim);display:flex;align-items:center;gap:10px;transition:color 0.3s;}
+.service-card:hover .service-features li{color:var(--text-muted);}
 .service-features li::before{content:'';width:14px;height:1px;background:var(--gold);flex-shrink:0;}
 .service-badge{display:inline-flex;padding:6px 14px;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.18);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);}
+
+/* ── PROCESS ── */
+#process{background:var(--surface);position:relative;overflow:hidden;}
+#process::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.04) 0%,transparent 70%);pointer-events:none;}
+.process-header{text-align:center;max-width:600px;margin:0 auto 80px;}
+.process-header h2{font-size:clamp(38px,4vw,58px);margin:12px 0 20px;letter-spacing:-0.02em;}
+.process-header p{color:var(--text-muted);font-size:16px;line-height:1.7;font-weight:300;}
+.process-header .gold-line{margin:24px auto;}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;position:relative;}
+.steps::before{content:'';position:absolute;top:52px;left:calc(12.5% + 24px);right:calc(12.5% + 24px);height:1px;background:linear-gradient(90deg,var(--gold) 0%,rgba(201,168,76,0.3) 50%,rgba(201,168,76,0.1) 100%);z-index:0;}
+.step{background:var(--surface-2);padding:40px 32px;text-align:center;position:relative;transition:background 0.3s;}
+.step:hover{background:var(--surface-3);}
+.step-num{width:52px;height:52px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-family:var(--font-display);font-size:20px;color:var(--gold);position:relative;z-index:1;transition:border-color 0.3s,background 0.3s;}
+.step:hover .step-num{border-color:var(--gold);background:rgba(201,168,76,0.08);}
+.step h3{font-size:18px;font-weight:400;margin-bottom:12px;letter-spacing:-0.01em;}
+.step p{font-size:13px;color:var(--text-muted);line-height:1.6;font-weight:300;}
 
 /* ── PORTFOLIO ── */
 #portfolio{background:var(--black);}
@@ -160,51 +209,261 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
 
 .video-card{background:var(--surface-2);position:relative;overflow:hidden;cursor:pointer;}
 .video-thumb{aspect-ratio:16/9;background:var(--surface-3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.video-thumb video{width:100%;height:100%;object-fit:cover;display:block;}
+.video-thumb::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.05) 0%,transparent 60%);}
+/* Ensure local video files fill the container */
+.video-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 /* ── RESULTS ── */
 #results{background:var(--surface);position:relative;overflow:hidden;}
+#results::after{content:'';position:absolute;bottom:0;right:0;width:400px;height:400px;background:radial-gradient(circle at bottom right,rgba(201,168,76,0.05),transparent 70%);pointer-events:none;}
 .results-header{text-align:center;max-width:640px;margin:0 auto 80px;}
-.results-header h2{font-size:clamp(38px,4vw,58px);margin:12px 0 20px;}
+.results-header h2{font-size:clamp(38px,4vw,58px);margin:12px 0 20px;letter-spacing:-0.02em;}
+.results-header p{color:var(--text-muted);font-size:16px;line-height:1.7;font-weight:300;}
+.results-header .gold-line{margin:24px auto;}
 .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-soft);}
-.result-item{background:var(--surface-2);padding:48px 36px;text-align:center;transition:background 0.3s;}
+.result-item{background:var(--surface-2);padding:48px 36px;text-align:center;transition:background 0.3s;cursor:default;}
 .result-item:hover{background:var(--surface-3);}
+.result-icon{width:34px;height:34px;margin:0 auto 20px;}
 .result-num{font-family:var(--font-display);font-size:52px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:8px;}
 .result-title{font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;}
-.result-desc{font-size:13px;color:var(--text-muted);line-height:1.5;}
+.result-desc{font-size:13px;color:var(--text-muted);line-height:1.5;font-weight:300;}
 
 /* ── FOUNDER ── */
 #founder{background:var(--black);}
 .founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
 .founder-photo-wrap{position:relative;}
 .founder-photo{aspect-ratio:3/4;background:var(--surface-2);border:1px solid var(--border);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.founder-photo img{width:100%;height:100%;object-fit:cover;display:block;}
-.photo-note{position:absolute;bottom:-16px;right:-16px;background:var(--surface-3);border:1px solid var(--border);padding:16px 20px;font-size:12px;color:var(--text-muted);z-index: 10;}
+.founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 2;}
+.founder-photo::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(201,168,76,0.07),transparent 60%); z-index: 1;}
+.photo-note{position:absolute;bottom:-16px;right:-16px;background:var(--surface-3);border:1px solid var(--border);padding:16px 20px;font-size:12px;color:var(--text-muted); z-index: 10;}
 .photo-note strong{display:block;color:var(--gold);font-size:14px;margin-bottom:2px;}
+.founder-content .label{margin-bottom:20px;}
 .founder-content h2{font-size:clamp(38px,3.5vw,52px);letter-spacing:-0.02em;margin-bottom:8px;}
 .founder-title{font-size:16px;color:var(--text-dim);font-style:italic;font-family:var(--font-display);margin-bottom:32px;}
 .founder-bio{font-size:16px;color:var(--text-muted);line-height:1.8;font-weight:300;margin-bottom:40px;}
+.founder-creds{display:flex;flex-direction:column;gap:12px;margin-bottom:44px;}
+.cred{display:flex;align-items:flex-start;gap:16px;padding:18px 20px;background:var(--surface-2);border-left:2px solid var(--gold);transition:background 0.3s;}
+.cred:hover{background:var(--surface-3);}
+.cred-icon{width:20px;height:20px;flex-shrink:0;margin-top:2px;}
+.cred-text{font-size:14px;color:var(--text-muted);line-height:1.5;font-weight:300;}
+.cred-text strong{color:var(--text);font-weight:500;}
 
-/* ── MODAL ── */
-.modal-overlay {position: fixed; inset: 0; background: rgba(8, 8, 8, 0.85); backdrop-filter: blur(8px); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.4s var(--ease);}
-.modal-overlay.open {opacity: 1; visibility: visible;}
-.modal-content {background: var(--surface); border: 1px solid var(--border); width: 100%; max-width: 480px; padding: 48px 40px; position: relative;}
-.modal-close {position: absolute; top: 20px; right: 24px; background: transparent; border: none; color: var(--text-dim); font-size: 24px; cursor: pointer;}
-.modal-title {font-size: 32px; font-family: var(--font-display); color: var(--gold); margin-bottom: 8px; text-align: center;}
-.modal-subtitle {font-size: 14px; color: var(--text-muted); margin-bottom: 28px; text-align: center;}
-.modal-form {display: flex; flex-direction: column; gap: 16px;}
-.modal-form input {width: 100%; background: var(--surface-2); border: 1px solid var(--border-soft); color: var(--text); padding: 14px 16px; font-family: var(--font-body); outline: none;}
-.modal-form input:focus {border-color: var(--gold);}
+/* ── CTA ── */
+#cta{background:var(--black);padding:160px 0;position:relative;overflow:hidden;}
+#cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 70%);pointer-events:none;}
+#cta::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%);}
+.cta-inner{text-align:center;position:relative;z-index:1;}
+.cta-inner h2{font-size:clamp(44px,5.5vw,80px);line-height:1.0;letter-spacing:-0.03em;margin:20px 0 24px;}
+.cta-inner p{font-size:18px;color:var(--text-muted);max-width:520px;margin:0 auto 48px;line-height:1.6;font-weight:300;}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-note{margin-top:32px;font-size:12px;color:var(--text-dim);letter-spacing:0.08em;}
+
+/* ── FOOTER ── */
+footer{background:var(--surface);border-top:1px solid var(--border-soft);padding:60px 0 40px;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px;}
+.footer-brand-name{font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--gold);margin-bottom:16px;letter-spacing:0.06em;}
+.footer-tagline{font-size:14px;color:var(--text-muted);line-height:1.6;font-weight:300;max-width:260px;}
+.footer-col h5{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.footer-col ul{display:flex;flex-direction:column;gap:10px;}
+.footer-col a{font-size:14px;color:var(--text-muted);transition:color 0.2s;font-weight:300;}
+.footer-col a:hover{color:var(--text);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid var(--border-soft);font-size:12px;color:var(--text-dim);}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease-out),transform 0.7s var(--ease-out);}
 .reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+.reveal-delay-4{transition-delay:0.4s;}
 
-@media(max-width:1024px){.promise-grid{grid-template-columns:1fr;}.services-grid{grid-template-columns:1fr;}.portfolio-grid-3{grid-template-columns:1fr 1fr;}}
-@media(max-width:768px){.nav-links,.nav-cta{display:none;}.hamburger{display:flex;}.portfolio-grid-3{grid-template-columns:1fr;}.founder-grid{grid-template-columns:1fr;}}
+/* ── MODAL (BOOK A CALL) ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 8, 8, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10000; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s var(--ease);
+  padding: 20px;
+}
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  width: 100%;
+  max-width: 480px;
+  padding: 48px 40px;
+  position: relative;
+  transform: translateY(20px) scale(0.95);
+  transition: all 0.4s var(--ease);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.05);
+}
+.modal-overlay.open .modal-content {
+  transform: translateY(0) scale(1);
+}
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  outline: none;
+}
+.modal-close:hover {
+  color: var(--gold);
+}
+.modal-title {
+  font-size: 32px;
+  font-family: var(--font-display);
+  color: var(--gold);
+  margin-bottom: 8px;
+  line-height: 1.1;
+  text-align: center;
+}
+.modal-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  font-weight: 300;
+  text-align: center;
+}
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.modal-form input {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  color: var(--text);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: all 0.3s;
+  outline: none;
+}
+.modal-form input::placeholder {
+  color: var(--text-dim);
+}
+.modal-form input:focus {
+  border-color: var(--gold);
+  background: var(--surface-3);
+  box-shadow: 0 0 10px rgba(201,168,76,0.1);
+}
+.modal-form .btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}
+.form-note {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: -4px;
+}
+.modal-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 32px 0;
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.modal-divider::before,
+.modal-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-soft);
+}
+.modal-divider span {
+  padding: 0 16px;
+}
+.modal-contact-info {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.modal-contact-info p {
+  margin-bottom: 8px;
+}
+.modal-contact-info a {
+  color: var(--text);
+  transition: color 0.3s;
+}
+.modal-contact-info a:hover {
+  color: var(--gold);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .promise-grid{grid-template-columns:1fr;gap:60px;}
+  .services-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .steps::before{display:none;}
+  .results-grid{grid-template-columns:1fr 1fr;}
+  .founder-grid{grid-template-columns:1fr;gap:60px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:40px;}
+  .services-header{grid-template-columns:1fr;gap:20px;}
+  .portfolio-grid-3{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .container{padding:0 24px;}
+  .section{padding:100px 0;}
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .steps{grid-template-columns:1fr;}
+  .results-grid{grid-template-columns:1fr 1fr;}
+  .portfolio-grid-3{grid-template-columns:1fr;}
+  .hero-stats{gap:32px;flex-wrap:wrap;}
+  .footer-top{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+  .vs-block{display:none;}
+  .guarantee-banner{flex-direction:column;text-align:center;}
+}
+@media(max-width:480px){
+  .results-grid{grid-template-columns:1fr;}
+  .promise-pillars{grid-template-columns:1fr;}
+  .hero-ctas{flex-direction:column;align-items:center;}
+  .cta-buttons{flex-direction:column;align-items:center;}
+  .modal-content { padding: 36px 24px; }
+  .modal-title { font-size: 28px; }
+}
 </style>
 </head>
 <body>
+
+<div class="mobile-nav" id="mobileNav">
+  <span class="mobile-close" id="mobileClose">✕</span>
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#process" onclick="closeMobileNav()">Process</a>
+  <a href="#portfolio" onclick="closeMobileNav()">Work</a>
+  <a href="#founder" onclick="closeMobileNav()">About</a>
+  <a href="#" onclick="openModal(event)" style="color:var(--gold)">Book a Call</a>
+</div>
 
 <nav id="navbar">
   <div class="container">
@@ -212,13 +471,17 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
       <a href="index.html" class="nav-logo">AURORA HORIZON MEDIA</a>
       <div class="nav-links">
         <a href="#services">Services</a>
+        <a href="#process">Process</a>
         <a href="#portfolio">Work</a>
+        <a href="#results">Results</a>
         <a href="#founder">About</a>
       </div>
       <div class="nav-cta">
         <a href="#" onclick="openModal(event)" class="btn btn-primary btn-arrow">Book a Call</a>
       </div>
-      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </div>
 </nav>
@@ -226,12 +489,221 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
 <section id="hero">
   <div class="container">
     <div class="hero-content">
-      <div class="hero-eyebrow reveal"><div class="hero-eyebrow-line"></div><span class="label">scale now</span><div class="hero-eyebrow-line"></div></div>
-      <h1 class="display hero-headline reveal">Video That<br><span class="gold-italic">Builds Trust.</span><br>Drives Sales.</h1>
-      <p class="hero-sub reveal">Engineering retention and authority for visionary brands. Built for leaders who refuse to be ordinary.</p>
-      <div class="hero-ctas reveal">
+      <div class="hero-eyebrow reveal">
+        <div class="hero-eyebrow-line"></div>
+        <span class="label">scale now</span>
+        <div class="hero-eyebrow-line"></div>
+      </div>
+      <h1 class="display hero-headline reveal reveal-delay-1">
+        Video That<br>
+        <span class="gold-italic">Builds Trust.</span><br>
+        Drives Sales.
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        We partner with visionary brands to engineer retention, build authority, and transform content into scalable sales machines. Built for industry leaders who refuse to be ordinary.
+      </p>
+      <div class="hero-ctas reveal reveal-delay-3">
         <a href="#" onclick="openModal(event)" class="btn btn-primary btn-arrow">Book a Strategy Call</a>
         <a href="#portfolio" class="btn btn-outline">View Our Work</a>
+      </div>
+      <div class="hero-stats reveal reveal-delay-4">
+        <div><div class="stat-num">50+</div><div class="stat-label">Videos Delivered</div></div>
+        <div><div class="stat-num">3×</div><div class="stat-label">Avg. Retention Lift</div></div>
+        <div><div class="stat-num">100%</div><div class="stat-label">On-Time Delivery</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<section id="promise" class="section">
+  <div class="container">
+    <div class="promise-grid">
+      <div class="promise-text">
+        <span class="label reveal">Our Philosophy</span>
+        <div class="gold-line reveal"></div>
+        <h2 class="reveal">Most Agencies Fulfill.<br><span class="gold-italic">We Engineer</span><br>Performance.</h2>
+        <p class="reveal">
+          Most agencies just fulfill orders. We analyze audience psychology, identify niche patterns, and align with your brand's core message—engineering every frame to capture attention and drive revenue. That’s the difference between content that simply exists, and content that dominates.
+        </p>
+        <a href="#services" class="btn btn-outline btn-arrow reveal">See Our Services</a>
+      </div>
+
+      <div>
+        <div class="vs-block reveal">
+          <div class="vs-header">
+            <div class="vs-col-label them">Average Agency</div>
+            <div class="vs-col-label us">AURORA HORIZON MEDIA</div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-cell them">Cuts what you give them</div>
+            <div class="vs-cell us">Studies your audience first</div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-cell them">Generic pacing &amp; structure</div>
+            <div class="vs-cell us">Retention-engineered editing</div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-cell them">No hook strategy</div>
+            <div class="vs-cell us">Hook-optimized openings</div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-cell them">Platform-agnostic output</div>
+            <div class="vs-cell us">Platform-specific strategy</div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-cell them">Misses deadlines</div>
+            <div class="vs-cell us">100% on-time, every time</div>
+          </div>
+        </div>
+
+        <div class="promise-pillars reveal reveal-delay-1">
+          <div class="pillar">
+            <div class="pillar-icon icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
+            </div>
+            <h4>Hook Engineering</h4>
+            <p>Stop the scroll in 3 seconds with openings built on audience psychology.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h4>Retention Editing</h4>
+            <p>Pacing and cuts calibrated to maximize watch time and completion rate.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
+            </div>
+            <h4>Storytelling</h4>
+            <p>Structure that builds trust, authority, and emotional connection.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            </div>
+            <h4>Platform Strategy</h4>
+            <p>Format and pacing tailored to each platform's algorithm and audience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <span class="label reveal">What We Do</span>
+        <div class="gold-line reveal"></div>
+        <h2 class="reveal">Our <span class="gold-italic">Services</span></h2>
+      </div>
+      <p class="reveal">Every service is purpose-built around one goal — video that performs. No templates. No shortcuts.</p>
+    </div>
+
+    <div class="guarantee-banner reveal">
+      <div class="guarantee-icon icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <p class="guarantee-text">
+        <strong>No outsourcing. No juniors.</strong> Every project is handled by a dedicated editor personally trained by the founder — ensuring consistent, high-performance quality on every delivery.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-icon icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <h3>Short-Form Editing</h3>
+        <p>Short-form content engineered for maximum retention and conversion. We build scroll-stopping assets that capture attention and drive aggressive growth.</p>
+        <ul class="service-features">
+          <li>Instagram Reels</li>
+          <li>YouTube Shorts</li>
+          <li>Hook-first editing structure</li>
+          <li>Captions &amp; motion text overlays</li>
+          <li>Retention-optimized pacing</li>
+          <li>Fast turnaround delivery</li>
+        </ul>
+        <span class="service-badge">Dedicated Short-Form Editor</span>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">02</div>
+        <div class="service-icon icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m10 7 5 3-5 3Z"/><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
+        </div>
+        <h3>Long-Form Editing</h3>
+        <p>Strategic, high-fidelity long-form video designed to establish unshakeable authority, nurture trust, and convert viewers into high-value clients.</p>
+        <ul class="service-features">
+          <li>YouTube Videos</li>
+          <li>Online Courses</li>
+          <li>SaaS &amp; Product Videos</li>
+          <li>Podcasts &amp; Interview Edits</li>
+          <li>Documentary Editing</li>
+          <li>Motion Graphics</li>
+          <li>Color Grading</li>
+        </ul>
+        <span class="service-badge">Dedicated Long-Form Editor</span>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">03</div>
+        <div class="service-icon icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <h3>Strategy + Guidance</h3>
+        <p>We build a complete editing strategy around your goals, audience, and platform — then execute it. Built for leaders who want to scale with intent.</p>
+        <ul class="service-features">
+          <li>Learning your audience &amp; niche deeply</li>
+          <li>Content structure &amp; flow planning</li>
+          <li>Platform-specific editing approach</li>
+          <li>Repurposing long-form into short-form</li>
+          <li>Performance review &amp; iteration</li>
+          <li>Monthly strategy call with the founder</li>
+        </ul>
+        <span class="service-badge">Founder-Led Consulting</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="process" class="section">
+  <div class="container">
+    <div class="process-header">
+      <span class="label reveal">The Process</span>
+      <div class="gold-line reveal"></div>
+      <h2 class="reveal">How We <span class="gold-italic">Work</span></h2>
+      <p class="reveal">A proven system built to deliver high-performing video, every time — with zero guesswork.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Deep Dive</h3>
+        <p>We study your brand, audience, and content goals before touching a single frame. No assumptions.</p>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <h3>Edit Strategy</h3>
+        <p>We plan the hook, pacing, structure, and platform approach tailored to your niche and goals.</p>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <h3>Precision Edit</h3>
+        <p>High-retention editing using proven techniques — motion, pacing, captions, and visual storytelling.</p>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <h3>Deliver &amp; Optimize</h3>
+        <p>On-time delivery, revisions included. We review performance and refine with every batch.</p>
       </div>
     </div>
   </div>
@@ -239,19 +711,121 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
 
 <section id="portfolio" class="section">
   <div class="container">
-    <div class="portfolio-header"><span class="label reveal">Our Work</span><h2 class="reveal">The <span class="gold-italic">Portfolio</span></h2></div>
-    <div class="portfolio-section-label"><h3>Long Form</h3></div>
-    <div class="portfolio-grid-3">
-      <div class="video-card"><div class="video-thumb"><video controls preload="metadata"><source src="1.mp4" type="video/mp4"></video></div></div>
-      <div class="video-card"><div class="video-thumb"><video controls preload="metadata"><source src="2.mp4" type="video/mp4"></video></div></div>
-      <div class="video-card"><div class="video-thumb"><video controls preload="metadata"><source src="3.mp4" type="video/mp4"></video></div></div>
+    <div class="portfolio-header">
+      <span class="label reveal">Our Work</span>
+      <div class="gold-line"></div>
+      <h2 class="reveal">The <span class="gold-italic">Portfolio</span></h2>
     </div>
+
+    <div class="portfolio-section-label reveal"><h3>Long Form</h3></div>
+    <div class="portfolio-grid-3 reveal">
+      
+      <div class="video-card">
+        <div class="video-thumb">
+          <video controls preload="metadata">
+            <source src="1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumb">
+          <video controls preload="metadata">
+            <source src="2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumb">
+          <video controls preload="metadata">
+            <source src="3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+    </div>
+
     <div class="portfolio-spacer"></div>
-    <div class="portfolio-section-label"><h3>Short Form</h3></div>
-    <div class="portfolio-grid-3">
-      <div class="video-card"><div class="video-thumb" style="aspect-ratio:9/16;"><video controls preload="metadata"><source src="REEL1.mp4" type="video/mp4"></video></div></div>
-      <div class="video-card"><div class="video-thumb" style="aspect-ratio:9/16;"><video controls preload="metadata"><source src="REEL2.mp4" type="video/mp4"></video></div></div>
-      <div class="video-card"><div class="video-thumb" style="aspect-ratio:9/16;"><video controls preload="metadata"><source src="REEL3.mp4" type="video/mp4"></video></div></div>
+
+    <div class="portfolio-section-label reveal"><h3>Short Form</h3></div>
+    <div class="portfolio-grid-3 reveal">
+      
+      <div class="video-card">
+        <div class="video-thumb" style="aspect-ratio:9/16;max-height:420px;">
+          <video controls preload="metadata">
+            <source src="REEL1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumb" style="aspect-ratio:9/16;max-height:420px;">
+          <video controls preload="metadata">
+            <source src="REEL2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumb" style="aspect-ratio:9/16;max-height:420px;">
+          <video controls preload="metadata">
+            <source src="REEL3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="results" class="section">
+  <div class="container">
+    <div class="results-header">
+      <span class="label reveal">The Impact</span>
+      <div class="gold-line reveal"></div>
+      <h2 class="reveal">Results That<br><span class="gold-italic">Actually Move</span> Numbers</h2>
+      <p class="reveal">Premium editing isn't a cost — it's the highest-ROI investment in your content machine.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-item reveal">
+        <div class="result-icon icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="result-num">3×</div>
+        <div class="result-title">Watch Time</div>
+        <div class="result-desc">Clients see 3× average watch time after switching to retention-based editing.</div>
+      </div>
+      <div class="result-item reveal reveal-delay-1">
+        <div class="result-icon icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        </div>
+        <div class="result-num">↑67%</div>
+        <div class="result-title">Retention Rate</div>
+        <div class="result-desc">Better hooks and pacing keep more viewers watching till the end.</div>
+      </div>
+      <div class="result-item reveal reveal-delay-2">
+        <div class="result-icon icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="result-num">2×</div>
+        <div class="result-title">Trust &amp; Authority</div>
+        <div class="result-desc">Professional video signals credibility before a single word is said.</div>
+      </div>
+      <div class="result-item reveal reveal-delay-3">
+        <div class="result-icon icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 4.1 12 6"/><path d="m5.1 8-2.9-.8"/><path d="m6 12-1.9 2"/><path d="M7.2 2.2 8 5.1"/><path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z"/></svg>
+        </div>
+        <div class="result-num">↑40%</div>
+        <div class="result-title">Conversions</div>
+        <div class="result-desc">Coaches and brands see measurable lift in leads and sales from better video.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -260,83 +834,243 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
   <div class="container">
     <div class="founder-grid">
       <div class="founder-photo-wrap reveal">
-        <div class="founder-photo"><img src="FAIZ.jpg" alt="Faiz Shaikh"></div>
-        <div class="photo-note"><strong>Faiz Shaikh</strong>Founder &amp; Lead Editor</div>
+        <div class="founder-photo">
+          <div class="founder-photo-inner">
+            <img src="FAIZ.jpg" alt="Faiz Shaikh">
+          </div>
+        </div>
+        <div class="photo-note">
+          <strong>Faiz Shaikh</strong>
+          Founder &amp; Lead Editor
+        </div>
       </div>
+
       <div class="founder-content">
-        <span class="label">The Founder</span><div class="gold-line"></div>
-        <h2>Faiz Shaikh</h2>
-        <p class="founder-bio">I've been obsessed with one thing: building video assets that actually perform. Every project goes through my strict quality standard before delivery.</p>
-        <a href="#" onclick="openModal(event)" class="btn btn-primary btn-arrow">Work With Us</a>
+        <span class="label reveal">The Founder</span>
+        <div class="gold-line reveal"></div>
+        <h2 class="reveal">Faiz Shaikh</h2>
+        <p class="founder-title reveal">Founder &amp; Creative Director</p>
+        <p class="founder-bio reveal">
+          I started editing because I believed most brands were leaving serious money on the table — not because their product was bad, but because their content didn't convert. I've been obsessed with one thing: building video assets that actually perform. Every editor on my team is rigorously trained by me personally, and every project goes through my strict quality standard before delivery.
+        </p>
+        <div class="founder-creds">
+          <div class="cred reveal">
+            <div class="cred-icon icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            </div>
+            <div class="cred-text">Helped <strong>e-commerce brands</strong> increase product video conversions through retention-based editing strategies built for short-form.</div>
+          </div>
+          <div class="cred reveal reveal-delay-1">
+            <div class="cred-icon icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            </div>
+            <div class="cred-text">Helped <strong>coaches and course sellers</strong> sell more through professionally edited videos.</div>
+          </div>
+          <div class="cred reveal reveal-delay-2">
+            <div class="cred-icon icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            </div>
+            <div class="cred-text">Helped <strong>personal brands</strong> grow their audience with consistent, high-quality Reels and short-form content systems.</div>
+          </div>
+          <div class="cred reveal reveal-delay-3">
+            <div class="cred-icon icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            </div>
+            <div class="cred-text">Every editor is <strong>personally trained by the founder</strong> — no outsourcing, no quality gaps, no surprises.</div>
+          </div>
+        </div>
+        <a href="#" onclick="openModal(event)" class="btn btn-primary btn-arrow reveal">Work With Us</a>
       </div>
     </div>
   </div>
 </section>
 
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <span class="label reveal">Ready to Scale?</span>
+      <div class="gold-line reveal" style="margin:24px auto;"></div>
+      <h2 class="display reveal">
+        Stop Uploading Videos.<br>
+        Start <span class="gold-italic">Scaling</span> With Them.
+      </h2>
+      <p class="reveal">
+        Book a free 15-minute strategy call. We'll audit your current content and show you exactly where retention and conversions are bleeding out.
+      </p>
+      <div class="cta-buttons reveal">
+        <a href="#" onclick="openModal(event)" class="btn btn-primary btn-arrow">Book a Strategy Call</a>
+        <a href="#portfolio" class="btn btn-outline">View Our Work</a>
+      </div>
+      <p class="cta-note reveal">No commitment. No pitch. Just clarity on what's costing you growth.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">AURORA HORIZON MEDIA</div>
+        <p class="footer-tagline">Premium video editing for brands that refuse to be ordinary.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Short-Form Editing</a></li>
+          <li><a href="#services">Long-Form Editing</a></li>
+          <li><a href="#services">Content Strategy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#founder">About Us</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#process">Process</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#" onclick="openModal(event)">Book a Call</a></li>
+          <li><a href="https://instagram.com/aurorahorizonmedia" target="_blank">@aurorahorizonmedia</a></li>
+          <li><a href="mailto:aurorahorizonmedia@gmail.com">aurorahorizonmedia@gmail.com</a></li>
+          <li><a href="tel:+919136200734">+91 91362 00734</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 AURORA HORIZON MEDIA. All rights reserved.</span>
+      <span>Crafted with precision. Delivered on time.</span>
+    </div>
+  </div>
+</footer>
+
 <div class="modal-overlay" id="contactModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="modal-body-content">
+    
+    <div id="modal-form-container">
         <h3 class="modal-title">Book a Call</h3>
-        <p class="modal-subtitle">Leave your details and I will reach out personally.</p>
+        <p class="modal-subtitle">Leave your details and we will reach out to schedule.</p>
+        
         <form id="contact-form" class="modal-form">
           <input type="text" name="name" placeholder="Name" required>
           <input type="email" name="email" placeholder="Email" required>
           <input type="tel" name="phone" placeholder="Phone Number" required>
           <button type="submit" class="btn btn-primary">Submit Request</button>
+          <p class="form-note">I will contact you personally.</p>
         </form>
     </div>
-    <div id="success-message" style="display:none; text-align:center; padding: 20px 0;">
+
+    <div id="success-message" style="display: none; text-align: center; padding: 20px 0;">
         <div style="font-size: 50px; margin-bottom: 15px; color: var(--gold);">✓</div>
-        <h3 style="font-family: var(--font-display); color: var(--gold); font-size: 28px; margin-bottom: 10px;">Request Received</h3>
-        <p style="color: var(--text-muted); font-weight: 300;">Your information has been sent.<br>I will reach out within 24 hours.</p>
+        <h3 style="font-family: var(--font-display); color: var(--gold); font-size: 28px; margin-bottom: 10px;">Strategy Call Requested</h3>
+        <p style="color: var(--text-muted); font-weight: 300;">Your information has been securely transmitted.<br>I will personally reach out within 24 hours.</p>
+    </div>
+
+    <div id="error-message" style="display: none; color: #ff6b6b; text-align: center; margin-top: 16px; font-size: 14px;">
+      Oops! There was a problem. Please try again.
+    </div>
+    
+    <div class="modal-divider"><span>OR</span></div>
+    
+    <div class="modal-contact-info">
+      <p>Email: <a href="mailto:aurorahorizonmedia@gmail.com">aurorahorizonmedia@gmail.com</a></p>
+      <p>Phone: <a href="tel:+919136200734">+91 9136200734</a></p>
+      <p>Instagram: <a href="https://instagram.com/aurorahorizonmedia" target="_blank">@aurorahorizonmedia</a></p>
     </div>
   </div>
 </div>
 
 <script>
+  // Navbar Scroll
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
 
+  // Mobile Nav
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => { mobileNav.classList.add('open'); document.body.style.overflow = 'hidden'; });
+  mobileClose.addEventListener('click', closeMobileNav);
+  function closeMobileNav() { mobileNav.classList.remove('open'); document.body.style.overflow = ''; }
+
+  // Scroll Reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => observer.observe(el));
 
+  // Active Nav Links
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
+    navLinks.forEach(l => { l.style.color = ''; if (l.getAttribute('href') === '#' + current) l.style.color = 'var(--gold)'; });
+  });
+
+  // Modal Logic
   const modal = document.getElementById('contactModal');
-  function openModal(e) { if(e) e.preventDefault(); modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  
+  function openModal(e) {
+    if(e) e.preventDefault();
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden'; 
+    closeMobileNav(); 
+  }
+  
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = ''; 
+  }
+  
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
 
-  // PROFESSIONAL FORM HANDLING
-  const form = document.getElementById('contact-form');
-  const modalBody = document.getElementById('modal-body-content');
-  const successMsg = document.getElementById('success-message');
+  // CUSTOM PROFESSIONAL FORM HANDLING
+  const contactForm = document.getElementById('contact-form');
+  const formContainer = document.getElementById('modal-form-container');
+  const successMessage = document.getElementById('success-message');
+  const errorMessage = document.getElementById('error-message');
 
-  form.addEventListener('submit', async (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = form.querySelector('button');
+    const btn = contactForm.querySelector('button');
     btn.textContent = "Sending...";
     btn.disabled = true;
 
     try {
       const response = await fetch('https://formspree.io/f/meepzljd', {
         method: 'POST',
-        body: new FormData(form),
+        body: new FormData(contactForm),
         headers: { 'Accept': 'application/json' }
       });
 
       if (response.ok) {
-        modalBody.style.display = 'none';
-        successMsg.style.display = 'block';
-      } else { throw new Error(); }
+        // Professional fade transition
+        formContainer.style.display = 'none';
+        successMessage.style.display = 'block';
+        successMessage.style.opacity = '0';
+        setTimeout(() => {
+          successMessage.style.transition = "opacity 0.8s ease";
+          successMessage.style.opacity = "1";
+        }, 10);
+      } else {
+        throw new Error();
+      }
     } catch (err) {
-      alert("Submission failed. Please try again.");
+      errorMessage.style.display = 'block';
       btn.textContent = "Submit Request";
       btn.disabled = false;
     }
   });
 </script>
+
 </body>
 </html>
