@@ -103,7 +103,7 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
 
 .scroll-indicator{
   position:absolute;
-  bottom:80px; /* FIXED */
+  bottom:80px; 
   left:50%;
   transform:translateX(-50%);
   display:flex;
@@ -209,13 +209,15 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-back
 
 .video-card{background:var(--surface-2);position:relative;overflow:hidden;cursor:pointer;}
 .video-thumb{aspect-ratio:16/9;background:var(--surface-3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.video-thumb::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.05) 0%,transparent 60%);}
-/* Ensure local video files fill the container */
+.video-thumb::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.05) 0%,transparent 60%);z-index:1;pointer-events:none;}
+
+/* FIXED VIDEO STYLES */
 .video-thumb video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  position: relative;
 }
 
 /* ── RESULTS ── */
@@ -722,7 +724,7 @@ footer{background:var(--surface);border-top:1px solid var(--border-soft);padding
       
       <div class="video-card">
         <div class="video-thumb">
-          <video controls preload="metadata">
+          <video controls autoplay muted loop playsinline preload="metadata">
             <source src="1.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -731,7 +733,7 @@ footer{background:var(--surface);border-top:1px solid var(--border-soft);padding
       
       <div class="video-card">
         <div class="video-thumb">
-          <video controls preload="metadata">
+          <video controls autoplay muted loop playsinline preload="metadata">
             <source src="2.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -740,7 +742,7 @@ footer{background:var(--surface);border-top:1px solid var(--border-soft);padding
       
       <div class="video-card">
         <div class="video-thumb">
-          <video controls preload="metadata">
+          <video controls autoplay muted loop playsinline preload="metadata">
             <source src="3.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -756,7 +758,7 @@ footer{background:var(--surface);border-top:1px solid var(--border-soft);padding
       
       <div class="video-card">
         <div class="video-thumb" style="aspect-ratio:9/16;max-height:420px;">
-          <video controls preload="metadata">
+          <video controls autoplay muted loop playsinline preload="metadata">
             <source src="REEL1.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -765,7 +767,7 @@ footer{background:var(--surface);border-top:1px solid var(--border-soft);padding
       
       <div class="video-card">
         <div class="video-thumb" style="aspect-ratio:9/16;max-height:420px;">
-          <video controls preload="metadata">
+          <video controls autoplay muted loop playsinline preload="metadata">
             <source src="REEL2.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -774,7 +776,7 @@ footer{background:var(--surface);border-top:1px solid var(--border-soft);padding
       
       <div class="video-card">
         <div class="video-thumb" style="aspect-ratio:9/16;max-height:420px;">
-          <video controls preload="metadata">
+          <video controls autoplay muted loop playsinline preload="metadata">
             <source src="REEL3.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -970,7 +972,7 @@ footer{background:var(--surface);border-top:1px solid var(--border-soft);padding
     </div>
 
     <div id="error-message" style="display: none; color: #ff6b6b; text-align: center; margin-top: 16px; font-size: 14px;">
-      Oops! There was a problem. Please try again.
+        Oops! There was a problem. Please try again.
     </div>
     
     <div class="modal-divider"><span>OR</span></div>
@@ -1053,7 +1055,6 @@ footer{background:var(--surface);border-top:1px solid var(--border-soft);padding
       });
 
       if (response.ok) {
-        // Professional fade transition
         formContainer.style.display = 'none';
         successMessage.style.display = 'block';
         successMessage.style.opacity = '0';
